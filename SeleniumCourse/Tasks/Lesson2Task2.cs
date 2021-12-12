@@ -3,10 +3,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace SeleniumCourse
+namespace SeleniumCourse.Tasks
 {
-    public class Lesson2Task1
+    class Lesson2Task2
     {
         private WebDriver driver;
         private WebDriverWait wait;
@@ -21,11 +23,11 @@ namespace SeleniumCourse
         [Test]
         public void Test()
         {
-            this.driver.Url = "http://localhost/litecart/admin/login.php";
-           
-            //this.driver.FindElement(By.XPath("//div[. = 'I agree']")).Click();
-            //this.driver.FindElement(By.Name("q")).SendKeys("webdriver\n");
-            //this.wait.Until(c => c.FindElement(By.XPath("//*[contains(., 'WebDriver')]")));
+            this.driver.Url = "https://www.google.com/";
+            //Agree to use cookies
+            this.driver.FindElement(By.XPath("//div[. = 'I agree']")).Click();
+            this.driver.FindElement(By.Name("q")).SendKeys("webdriver\n");
+            this.wait.Until(c => c.FindElement(By.XPath("//*[contains(., 'WebDriver')]")));
         }
 
         [TearDown]
