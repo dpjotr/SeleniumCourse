@@ -8,7 +8,7 @@ namespace SeleniumCourse.Tasks
 {
     public class Lesson2Task1
     {
-            private WebDriver driver;
+        private WebDriver driver;
         private WebDriverWait wait;
 
         [SetUp]
