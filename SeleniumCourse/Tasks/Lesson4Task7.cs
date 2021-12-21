@@ -30,7 +30,7 @@ namespace SeleniumCourse.Tasks
                 var products = this.driver.FindElements(By.CssSelector("li.product"));
                 foreach (var product in products)
                 {
-                    int amountOfStickers = product.FindElements(By.CssSelector("[class*=sticker]")).Count;
+                    int amountOfStickers = product.FindElements(By.CssSelector("[class=sticker]")).Count;
                     Assert.True(amountOfStickers == 1);
                 }
             });
