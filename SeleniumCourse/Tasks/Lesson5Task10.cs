@@ -134,7 +134,7 @@ namespace SeleniumCourse.Tasks
                     mainPageProductDescription.saleProductPriceStyle.isStrong,
                     @"Sale price is not bold on the main page");
 
-                // Verify price style on the product page page
+                // Verify price style on the product page
                 color = productPageProductDescription.standardProductPriceStyle.color;
                 Assert.True(
                     color[0] == color[1] && color[1] == color[2],
