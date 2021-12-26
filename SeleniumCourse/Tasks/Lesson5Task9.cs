@@ -55,7 +55,7 @@ namespace SeleniumCourse.Tasks
                                                      .FindElement(By.CssSelector("option[selected]"))
                                                      .GetAttribute("textContent");
                             Assert.True(
-                                    String.Compare(previousGeozone, currentGeozone) >= 0,
+                                    String.Compare(previousGeozone, currentGeozone) <= 0,
                                     $"Geozones {previousGeozone} and {currentGeozone} are not ordered properly.");
 
                                 previousGeozone = currentGeozone;
