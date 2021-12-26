@@ -43,22 +43,19 @@ namespace SeleniumCourse.Tasks
                     var geozones = this.driver.FindElements(By.CssSelector("table#table-zones tr:not(.header)"));
 
                     var previousGeozone = geozones[0].FindElements(By.CssSelector("td"))[2]
-                                                        .FindElements(By.CssSelector("option"))
-                                                        .Where(x => x.GetAttribute("selected") == "true")
-                                                        .First()
-                                                        .GetAttribute("textContent");
+                                                    .FindElement(By.CssSelector("option[selected]"))
+                                                    .GetAttribute("textContent");
+                                                        
 
                     foreach (var geozone in geozones)
                     {
                         if (geozone.FindElement(By.CssSelector("td>a")).GetAttribute("id") != "add_zone")
                         {
                             var currentGeozone = geozone.FindElements(By.CssSelector("td"))[2]
-                                                    .FindElements(By.CssSelector("option"))
-                                                    .Where(x => x.GetAttribute("selected") == "true")
-                                                    .First()
-                                                    .GetAttribute("textContent");
+                                                     .FindElement(By.CssSelector("option[selected]"))
+                                                     .GetAttribute("textContent");
                             Assert.True(
-                                    String.Compare(previousGeozone, currentGeozone) <= 0,
+                                    String.Compare(previousGeozone, currentGeozone) >= 0,
                                     $"Geozones {previousGeozone} and {currentGeozone} are not ordered properly.");
 
                                 previousGeozone = currentGeozone;
