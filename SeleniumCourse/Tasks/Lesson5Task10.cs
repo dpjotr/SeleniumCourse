@@ -63,14 +63,18 @@ namespace SeleniumCourse.Tasks
                 {
                     isCrossedOut = product.FindElement(By.CssSelector(".regular-price")).TagName == "s",
                     color = GetColor(product.FindElement(By.CssSelector(".regular-price")).GetCssValue("color")),
-                    size = product.FindElement(By.CssSelector(".regular-price")).Size,
+                    size = double.Parse(
+                        product.FindElement(By.CssSelector(".regular-price")).GetCssValue("font-size")
+                        .Replace("px","").Replace('.',',')),
                 },
 
                 saleProductPriceStyle = new
                 {
                     isStrong = product.FindElement(By.CssSelector(".campaign-price")).TagName == "strong",
                     color = GetColor(product.FindElement(By.CssSelector(".campaign-price")).GetCssValue("color")),
-                    size = product.FindElement(By.CssSelector(".campaign-price")).Size,
+                    size = double.Parse(
+                        product.FindElement(By.CssSelector(".campaign-price")).GetCssValue("font-size")
+                        .Replace("px", "").Replace('.', ',')),
                 },
             };
 
@@ -91,14 +95,18 @@ namespace SeleniumCourse.Tasks
                 {
                     isCrossedOut = product.FindElement(By.CssSelector(".regular-price")).TagName == "s",
                     color = GetColor(product.FindElement(By.CssSelector(".regular-price")).GetCssValue("color")),
-                    size = product.FindElement(By.CssSelector(".regular-price")).Size,
+                    size = double.Parse(
+                        product.FindElement(By.CssSelector(".regular-price")).GetCssValue("font-size")
+                        .Replace("px", "").Replace('.', ',')),
                 },
 
                 saleProductPriceStyle = new
                 {
                     isStrong = product.FindElement(By.CssSelector(".campaign-price")).TagName == "strong",
                     color = GetColor(product.FindElement(By.CssSelector(".campaign-price")).GetCssValue("color")),
-                    size = product.FindElement(By.CssSelector(".campaign-price")).Size,
+                    size = double.Parse(
+                        product.FindElement(By.CssSelector(".campaign-price")).GetCssValue("font-size")
+                        .Replace("px", "").Replace('.', ',')),
                 },
             };
 
@@ -153,12 +161,12 @@ namespace SeleniumCourse.Tasks
 
                 // Verify price size
                 Assert.True(
-                    mainPageProductDescription.standardProductPriceStyle.size.Height < 
-                                            mainPageProductDescription.saleProductPriceStyle.size.Height,
+                    mainPageProductDescription.standardProductPriceStyle.size <
+                                            mainPageProductDescription.saleProductPriceStyle.size,
                     @"Standard product price is bigger than sale price on the main page");
                 Assert.True(
-                    productPageProductDescription.standardProductPriceStyle.size.Height < 
-                                            productPageProductDescription.saleProductPriceStyle.size.Height,
+                    productPageProductDescription.standardProductPriceStyle.size < 
+                                            productPageProductDescription.saleProductPriceStyle.size,
                     @"Standard product price is bigger than sale price on the product page");
             });
         }
