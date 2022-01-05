@@ -88,9 +88,6 @@ namespace SeleniumCourse.Tasks
                     "#tab-general > table > tbody > tr:nth-child(8) > td table > tbody > tr > td > select[name=\"sold_out_status_id\"]"));
             new SelectElement(soldOutStatusSelectElement).SelectByText("Sold out");
 
-            //this.driver.FindElement(By.CssSelector(""));
-            //this.driver.FindElement(By.CssSelector(""));
-
             var path = (@"Images\blackDuckImage.jpeg");
 
             while(!File.Exists(path))
