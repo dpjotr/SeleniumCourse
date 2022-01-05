@@ -98,7 +98,6 @@ namespace SeleniumCourse.Tasks
             this.driver.FindElement(By.CssSelector("#tab-general > table > tbody > tr:nth-child(9) input[type=\"file\"]"))
                     .SendKeys(Path.GetFullPath(path));
 
-
             var currentDate = DateTime.Now;
 
             this.driver.FindElement(By.CssSelector(
@@ -152,8 +151,7 @@ namespace SeleniumCourse.Tasks
             Assert.True(
                 this.driver.FindElements(By.CssSelector(".dataTable tr > td > a"))
                 .Where(x=> x.GetAttribute("textContent") == productName) != null,
-                "New product was not found in the product list");
-            
+                "New product was not found in the product list");            
         }
 
         [TearDown]
