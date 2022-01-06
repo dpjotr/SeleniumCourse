@@ -53,10 +53,10 @@ namespace SeleniumCourse.Tasks
             {
                 productName = product.FindElement(By.CssSelector(".name")).GetAttribute("textContent").Trim(),
 
-                standardProductPrice = int.Parse(product.FindElement(By.CssSelector(".regular-price")).GetAttribute("textContent")
+                standardProductPrice = double.Parse(product.FindElement(By.CssSelector(".regular-price")).GetAttribute("textContent")
                         .Replace("$","").Trim()),
 
-                saleProductPrice = int.Parse(product.FindElement(By.CssSelector(".campaign-price")).GetAttribute("textContent")
+                saleProductPrice = double.Parse(product.FindElement(By.CssSelector(".campaign-price")).GetAttribute("textContent")
                         .Replace("$", "").Trim()),
 
                 standardProductPriceStyle = new
@@ -85,10 +85,10 @@ namespace SeleniumCourse.Tasks
             var productPageProductDescription = new
             {
                 productName = product.FindElement(By.CssSelector("h1.title")).GetAttribute("textContent").Trim(),
-                standardProductPrice = int.Parse(product.FindElement(By.CssSelector(".regular-price")).GetAttribute("textContent")
+                standardProductPrice = double.Parse(product.FindElement(By.CssSelector(".regular-price")).GetAttribute("textContent")
                         .Replace("$", "").Trim()),
 
-                saleProductPrice = int.Parse(product.FindElement(By.CssSelector(".campaign-price")).GetAttribute("textContent")
+                saleProductPrice = double.Parse(product.FindElement(By.CssSelector(".campaign-price")).GetAttribute("textContent")
                         .Replace("$", "").Trim()),
 
                 standardProductPriceStyle = new
