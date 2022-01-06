@@ -23,7 +23,7 @@ namespace SeleniumCourse.Tasks
         [Test]
         public void Test()
         {
-            while(this.cartItemCounter < 5)
+            while(this.cartItemCounter < 3)
             {
                 this.AddFirstPoularProductToCart();
             }
