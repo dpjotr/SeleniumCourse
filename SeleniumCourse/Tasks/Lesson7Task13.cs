@@ -33,21 +33,25 @@ namespace SeleniumCourse.Tasks
             while(this.driver.FindElements(By.CssSelector("#box-checkout-cart ul.shortcuts li.shortcut")).Count > 1)
             {
                 this.driver.FindElement(By.CssSelector("#box-checkout-cart ul.shortcuts > li > a")).Click();
-                var itemToDeleteRemoveButton = this.driver.FindElement(
-                    By.CssSelector("#box-checkout-cart button[name=\"remove_cart_item\"]"));
 
                 var summaryTableRowAmount = this.driver.FindElements(
                     By.CssSelector("#box-checkout-summary table tr")).Count;
 
-                itemToDeleteRemoveButton.Click();
+                this.driver.FindElement(
+                        By.CssSelector("#box-checkout-cart button[name=\"remove_cart_item\"]")).Click();
+
                 --summaryTableRowAmount;
 
                 wait.Until((driver) =>
                     driver.FindElements(By.CssSelector("#box-checkout-summary table tr")).Count == summaryTableRowAmount);
             }
 
-            this.driver.FindElement(
-                    By.CssSelector("#box-checkout-cart button[name=\"remove_cart_item\"]")).Click();
+            var itemToDeleteRemoveButton = this.driver.FindElement(
+                    By.CssSelector("#box-checkout-cart button[name=\"remove_cart_item\"]"));
+
+            itemToDeleteRemoveButton.Click();
+
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(itemToDeleteRemoveButton));
         }
 
         // Add first product from the list of the most popular products to cart
