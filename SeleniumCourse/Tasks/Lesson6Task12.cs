@@ -34,6 +34,13 @@ namespace SeleniumCourse.Tasks
             this.driver.FindElement(By.Name("password")).SendKeys("admin");
             this.driver.FindElement(By.Name("login")).Click();
 
+            var productName = "Black Duck";
+
+            while (this.ProductAlreadyAdded(productName))
+            {
+                productName += new Random().Next(1000);
+            }
+
             this.driver.FindElement(By.CssSelector("#box-apps-menu > li:nth-child(2) > a:nth-child(1) > span:nth-child(2)")).Click();
             this.driver.FindElement(By.CssSelector("a.button:nth-child(2)")).Click();
 
@@ -41,8 +48,6 @@ namespace SeleniumCourse.Tasks
 
             this.driver.FindElement(
                 By.CssSelector($"#tab-general > table > tbody > tr:nth-child(1) > td > label > input:nth-child({(int)status.enabled})")).Click();
-
-            var productName = "Black Duck";
 
             this.driver.FindElement(
                 By.CssSelector($"#tab-general > table > tbody > tr:nth-child(2) > td > span.input-wrapper input")).SendKeys(productName);
@@ -152,6 +157,28 @@ namespace SeleniumCourse.Tasks
                 this.driver.FindElements(By.CssSelector(".dataTable tr > td > a"))
                 .Where(x=> x.GetAttribute("textContent") == productName) != null,
                 "New product was not found in the product list");            
+        }
+
+        private bool ProductAlreadyAdded(string productName)
+        {
+            this.driver.Url = "http://localhost/litecart/admin";
+            this.driver.FindElement(By.CssSelector("#box-apps-menu > li:nth-child(2) > a:nth-child(1) > span:nth-child(2)")).Click();
+
+            var summaryInfo = this.driver.FindElement(By.CssSelector("tr.footer > td:nth-child(1)"));
+
+            this.driver.FindElement(By.CssSelector("form[name=\"search_form\"] input"))
+                .SendKeys(productName + "\n");
+
+            var url = @".+?(?=query=)(query=)" + "(" + productName.Replace(@" ", @"%20") + ")";
+
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlMatches(url));
+            wait.Until((driver) => driver.FindElement(By.CssSelector("tr.footer > td:nth-child(1)")));
+
+            var productList = this.driver.FindElements(By.CssSelector("form[name=\"catalog_form\"] tr.row td:nth-child(3)>a"))
+                .Select(x => x.GetAttribute("textContent").Trim()).ToList();
+
+            if (productList.Exists(x => x.Equals(productName))) return true;
+            return false;
         }
 
         [TearDown]
