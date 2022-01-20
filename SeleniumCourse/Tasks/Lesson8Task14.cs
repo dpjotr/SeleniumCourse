@@ -53,18 +53,13 @@ namespace SeleniumCourse.Tasks
 
             link.Click();
 
-            wait.Until((driver) =>this.driver.WindowHandles.Count > oldWindows.Count);
+            wait.Until((driver) => this.driver.WindowHandles.Count > oldWindows.Count);
             string newWindow = this.driver.WindowHandles.Where(x => !oldWindows.Contains(x)).First();
             
             driver.SwitchTo().Window(newWindow);
             driver.Close();
 
             driver.SwitchTo().Window(mainWindow);
-        }
-
-        private Func<IWebDriver, string> newWindowWasOpened(ReadOnlyCollection<string> oldWindows)
-        {
-            throw new NotImplementedException();
         }
 
         [TearDown]
